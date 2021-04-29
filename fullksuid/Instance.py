@@ -3,7 +3,6 @@ from fullksuid.Schemes import Schemes
 import struct
 
 
-
 class Instance:
     def __init__(self, scheme: Schemes, identifier: bytes):
         validation.check_class('scheme', scheme, Schemes)

@@ -5,6 +5,7 @@ import struct
 import netifaces
 import random
 import math
+import re
 
 from fullksuid import validation
 from fullksuid.Instance import Instance
@@ -17,6 +18,8 @@ this.environment = ""
 
 this.lastTimestamp = 0
 this.currentSequence = 0
+
+all_zeroes = re.compile(r"^0+$")
 
 
 def get_environment() -> str:
@@ -52,7 +55,7 @@ def get_instance():
 
     for interface in netifaces.interfaces():
         mac = netifaces.ifaddresses(interface)[netifaces.AF_LINK][0]["addr"].replace(":", "")
-        if mac is None or mac == "" or mac == "000000000000":
+        if mac is None or mac == "" or (all_zeroes.fullmatch(mac) is not None):
             continue
         break
 
