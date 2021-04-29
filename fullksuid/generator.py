@@ -52,7 +52,7 @@ def get_instance():
 
     for interface in netifaces.interfaces():
         mac = netifaces.ifaddresses(interface)[netifaces.AF_LINK][0]["addr"].replace(":", "")
-        if mac is None or mac == "":
+        if mac is None or mac == "" or mac == "000000000000":
             continue
         break
 

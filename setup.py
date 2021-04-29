@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="fullksuid",
-    version="1.0.1",
+    version="1.0.2",
     description="KSUID Implementation in python",
     url="https://github.com/cyberjacob/fullksuid",
     license="MIT",
