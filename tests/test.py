@@ -48,10 +48,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_manual(self):
         import fullksuid
-        import sys, secrets
-        sys.modules["fullksuid.generator"].instance = fullksuid.Instance(fullksuid.Schemes.RANDOM,
-                                                                         secrets.token_bytes(8))
-        parsed = fullksuid.Id.parse("charge_000000C8VcLyeKzZuQHgIUnoTpZ1a")
+        parsed = fullksuid.Id.parse("charge_000000C8VglT2xyGDup2ZO8BrQlga")
 
         print(f"ID: {parsed.__str__():>36}")
         print(f"Resource: {parsed.resource:>30}")

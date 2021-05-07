@@ -57,7 +57,7 @@ def generate(resource: str) -> Id:
             lastTimestamp = now_floored
             currentSequence = 0
 
-    return Id(environment, resource, now, instance, currentSequence)
+    return Id(environment, resource, now, get_instance(), currentSequence)
 
 
 def get_instance():
