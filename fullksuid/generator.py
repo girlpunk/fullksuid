@@ -3,10 +3,10 @@ import sys
 from datetime import datetime
 import struct
 import netifaces
-import random
 import math
 import re
 import threading
+import secrets
 
 from fullksuid import validation
 from fullksuid.Instance import Instance
@@ -67,7 +67,7 @@ def get_instance():
     #     identifier += struct.pack(">H", os.getpid() % 65536)
     #     return Instance(Schemes.MAC_AND_PID, identifier)
 
-    return Instance(Schemes.RANDOM, random.randbytes(8))
+    return Instance(Schemes.RANDOM, secrets.token_bytes(8))
 
 
 this.instance = get_instance()
