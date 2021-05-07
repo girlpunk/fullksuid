@@ -6,6 +6,7 @@ import netifaces
 import random
 import math
 import re
+import threading
 
 from fullksuid import validation
 from fullksuid.Instance import Instance
@@ -18,6 +19,7 @@ this.environment = ""
 
 this.lastTimestamp = 0
 this.currentSequence = 0
+this.lock = threading.Lock()
 
 all_zeroes = re.compile(r"^0+$")
 
@@ -38,14 +40,15 @@ def generate(resource: str) -> Id:
     if resource is None or resource == "":
         raise AttributeError("Resource must not be empty")
 
-    now = datetime.utcnow()
-    now_floored = math.floor(now.timestamp())
+    with this.lock:
+        now = datetime.utcnow()
+        now_floored = math.floor(now.timestamp())
 
-    if this.lastTimestamp == now_floored:
-        this.currentSequence += 1
-    else:
-        this.lastTimestamp = now_floored
-        this.currentSequence = 0
+        if this.lastTimestamp == now_floored:
+            this.currentSequence += 1
+        else:
+            this.lastTimestamp = now_floored
+            this.currentSequence = 0
 
     return Id(this.environment, resource, now, this.instance, this.currentSequence)
 
