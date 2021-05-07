@@ -61,18 +61,18 @@ def generate(resource: str) -> Id:
 
 
 def get_instance():
-    mac = None
-
-    for interface in netifaces.interfaces():
-        mac = netifaces.ifaddresses(interface)[netifaces.AF_LINK][0]["addr"].replace(":", "")
-        if mac is None or mac == "" or (all_zeroes.fullmatch(mac) is not None):
-            continue
-        break
-
-    if mac is not None:
-        identifier = bytes.fromhex(mac)
-        identifier += struct.pack(">H", os.getpid() % 65536)
-        return Instance(Schemes.MAC_AND_PID, identifier)
+    # mac = None
+    #
+    # for interface in netifaces.interfaces():
+    #     mac = netifaces.ifaddresses(interface)[netifaces.AF_LINK][0]["addr"].replace(":", "")
+    #     if mac is None or mac == "" or (all_zeroes.fullmatch(mac) is not None):
+    #         continue
+    #     break
+    #
+    # if mac is not None:
+    #     identifier = bytes.fromhex(mac)
+    #     identifier += struct.pack(">H", os.getpid() % 65536)
+    #     return Instance(Schemes.MAC_AND_PID, identifier)
 
     return Instance(Schemes.RANDOM, secrets.token_bytes(8))
 
